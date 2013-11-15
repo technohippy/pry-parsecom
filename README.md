@@ -18,7 +18,25 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    $ pry
+    [1] pry(main)> show-applications
+    Input parse.com email: andyjpn@gmail.com
+    Input parse.com password: 
+    FakeApp
+    import-test
+    nohana_nenga_production
+    nohana_nenga_staging
+    nohana_staging
+    parse_r
+    [2] pry(main)> use FakeApp
+    The current app is FakeApp.
+    [3] pry(main)> show-classes
+    Comment
+    Post
+    _User
+    [4] pry(main)> Comment.find :all
+    => [<Comment: {"author"=>#<Parse::Pointer:0x007fc6796dbba8 @r...
+    [5] pry(main)> exit
 
 ## Contributing
 
