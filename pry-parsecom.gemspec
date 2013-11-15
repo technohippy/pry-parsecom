@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'parse/console/version'
+require 'pry-parsecom/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "pry-parsecom"
-  gem.version       = Parse::Console::VERSION
+  gem.version       = Parsecom::VERSION
   gem.authors       = ["Ando Yasushi"]
   gem.email         = ["andyjpn@gmail.com"]
   gem.description   = %q{CLI for parse.com}
