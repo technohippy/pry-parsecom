@@ -13,6 +13,7 @@ PryParsecom::Commands.create_command "show-applications" do
   end
 
   def process
+    PryParsecom::Setting.setup_if_needed
     PryParsecom::Setting.app_names.each do |app|
       output.puts app
     end

@@ -11,7 +11,7 @@ unless ENV['DISABLE_PRY_PARSECOM']
   require 'pry-parsecom/commands'
 #  require 'pry-parsecom/model_formatter'
   
-  module Parsecom
+  module PryParsecom
     module_function
 
     def ask_email_and_password

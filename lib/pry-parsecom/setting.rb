@@ -33,6 +33,12 @@ module PryParsecom
         @@apps[@@current_app]
       end
 
+      def setup_if_needed
+        if @@apps.empty?
+          refresh *PryParsecom.ask_email_and_password unless load
+        end
+      end
+
       def read_setting_file name
         begin File.read "#{DOT_DIRNAME}/#{name}" rescue '' end
       end
@@ -121,6 +127,7 @@ module PryParsecom
       def by_name app_name
         @@apps[app_name.to_s]
       end
+      alias [] by_name
     end
 
     attr_accessor :app_name, :app_id, :api_key, :master_key, :schema
@@ -130,12 +137,11 @@ module PryParsecom
         app_name, app_id, api_key, master_key, schema
     end
 
-    def set parse_client
+    def set
       Parse.credentials :application_id => @app_id, :api_key => @api_key, :mater_key => @master_key
-      parse_client.application_id = @app_id
-      parse_client.api_key = @api_key
-      parse_client.master_key = @master_key
-      parse_client
+      Parse::Client.default.application_id = @app_id
+      Parse::Client.default.api_key = @api_key
+      Parse::Client.default.master_key = @master_key
 
       schema['collection'].each do |e|
         class_name = e['id']
@@ -149,7 +155,7 @@ module PryParsecom
       end
     end
 
-    def reset parse_client
+    def reset
       schema['collection'].each do |e|
         class_name = e['id']
         next if class_name[0] == '_'
@@ -165,10 +171,10 @@ module PryParsecom
       end
 
       Parse.credentials :application_id => '', :api_key => '', :mater_key => ''
-      parse_client.application_id = nil
-      parse_client.api_key = nil
-      parse_client.master_key = nil
-      parse_client
+      Parse::Client.default.application_id = nil
+      Parse::Client.default.api_key = nil
+      Parse::Client.default.master_key = nil
+      Parse::Client.default
     end
 
     def classes

@@ -17,21 +17,22 @@ PryParsecom::Commands.create_command "use" do
       output.puts opt
       return
     end
-
     app_name = args.first.to_s
     unless PryParsecom::Setting.has_app? app_name
       output.puts "#{app_name} does not exist."
       return
     end
 
-    if PryParsecom.current_app
+    PryParsecom::Setting.setup_if_needed
+
+    unless PryParsecom::Setting.current_app.to_s.empty?
       prev_setting = PryParsecom::Setting.current_setting
-      prev_setting.reset Parse::Client.default if prev_setting
+      prev_setting.reset if prev_setting
     end
 
-    setting = PryParsecom::Setting.by_name app_name
-    setting.set Parse::Client.default
-    PryParsecom.current_app = app_name
+    setting = PryParsecom::Setting[app_name]
+    setting.set
+    PryParsecom::Setting.current_app = app_name
     output.puts "The current app is #{app_name}."
   end
 end

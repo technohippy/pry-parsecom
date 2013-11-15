@@ -5,7 +5,7 @@ require 'pry-parsecom/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "pry-parsecom"
-  gem.version       = Parsecom::VERSION
+  gem.version       = PryParsecom::VERSION
   gem.authors       = ["Ando Yasushi"]
   gem.email         = ["andyjpn@gmail.com"]
   gem.description   = %q{CLI for parse.com}
