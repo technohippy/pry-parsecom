@@ -19,13 +19,6 @@ PryParsecom::Commands.create_command "show-credentials" do
       ['REST_API_KEY', Parse.api_key],
       ['MASTER_KEY', (Parse.master_key || '').sub(/.{30}$/, '*' * 30)]
     ]
-    puts table
-=begin
-    output.puts unindent <<-EOS
-      APPLICATION_ID: #{Parse.application_id}
-      REST_API_KEY  : #{Parse.api_key}
-      MASTER_KEY    : #{(Parse.master_key || '').sub(/.{30}$/, '*' * 30)}
-    EOS
-=end
+    output.puts table
   end
 end
