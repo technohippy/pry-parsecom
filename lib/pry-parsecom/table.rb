@@ -1,16 +1,16 @@
-module PryPersecom
+module PryParsecom
   class Table
     def initialize heads, rows=[]
       @heads = heads
-      @rows = []
       @col_widths = Hash.new 0
       @heads.each do |head|
         @col_widths[head] = head.size
       end
+      self.rows = rows
     end
 
     def rows= rows
-      @rows.clear
+      @rows = []
       rows.each do |row|
         add_row row
       end
@@ -22,6 +22,8 @@ module PryPersecom
         @heads.each do |head|
           cols << row[head]
         end
+      else
+        cols = row
       end
 
       cols.each.with_index do |col, i|
@@ -29,19 +31,21 @@ module PryPersecom
           @col_widths[i] = col.size
         end
       end
+      @rows << cols
     end
 
     def to_s
-      ret = @heads.map.with_index do |head, i|
-        head.center @col_width[i]
+      heads = @heads.map.with_index do |head, i|
+        head.center @col_widths[i]
       end.join " | "
+      ret = heads
       ret += "\n"
       ret += '=' * heads.size
       ret += "\n"
       @rows.each do |row|
-        ret += row.map.with_index do |col, i|
-          col.left @col_width[i]
-        end.join " | "
+        ret += row.map.with_index { |col, i|
+          col.ljust @col_widths[i]
+        }.join " | "
         ret += "\n"
       end
       ret

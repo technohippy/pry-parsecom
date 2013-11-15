@@ -128,6 +128,10 @@ module PryParsecom
         @@apps[app_name.to_s]
       end
       alias [] by_name
+
+      def each &block
+        @@apps.each &block
+      end
     end
 
     attr_accessor :app_name, :app_id, :api_key, :master_key, :schema
@@ -138,7 +142,7 @@ module PryParsecom
     end
 
     def set
-      Parse.credentials :application_id => @app_id, :api_key => @api_key, :mater_key => @master_key
+      Parse.credentials :application_id => @app_id, :api_key => @api_key, :master_key => @master_key
       Parse::Client.default.application_id = @app_id
       Parse::Client.default.api_key = @api_key
       Parse::Client.default.master_key = @master_key

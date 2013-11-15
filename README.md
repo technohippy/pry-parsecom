@@ -1,4 +1,4 @@
-# Pry::Parsecom
+# pry-parsecom
 
 TODO: Write a gem description
 
@@ -18,21 +18,29 @@ Or install it yourself as:
 
 ## Usage
 
-    $ pry
+    $ pry-parsecom
     [1] pry(main)> show-applications
     Input parse.com email: andyjpn@gmail.com
     Input parse.com password: 
+      Name
+    ========
     FakeApp
     FakeApp2
     [2] pry(main)> use FakeApp
     The current app is FakeApp.
-    [3] pry(main)> show-classes
+    [3] pry(main)> show-credentials
+         Key       |                  Value
+    =========================================================
+    APPLICATION_ID | abcdefghijklmnopqrstuvwxyzabcdefghijklmn
+    REST_API_KEY   | abcdefghijklmnopqrstuvwxyzabcdefghijklmn
+    MASTER_KEY     | abcdefghij******************************
+    [4] pry(main)> show-classes
     Comment
     Post
     _User
-    [4] pry(main)> Comment.find :all
+    [5] pry(main)> Comment.find :all
     => [<Comment: {"author"=>#<Parse::Pointer:0x007fc6796dbba8 @r...
-    [5] pry(main)> exit
+    [6] pry(main)> exit
 
 ## Contributing
 

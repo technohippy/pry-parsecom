@@ -14,7 +14,7 @@ PryParsecom::Commands.create_command "show-credentials" do
 
   def process
     PryParsecom::Setting.setup_if_needed
-    table = Table.new %w(Key Value), [
+    table = PryParsecom::Table.new %w(Key Value), [
       ['APPLICATION_ID', Parse.application_id],
       ['REST_API_KEY', Parse.api_key],
       ['MASTER_KEY', (Parse.master_key || '').sub(/.{30}$/, '*' * 30)]

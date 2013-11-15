@@ -1,7 +1,7 @@
 require 'pry'
 require 'pry-parsecom/version'
 
-unless ENV['DISABLE_PRY_PARSECOM']
+if ENV['ENABLE_PRY_PARSECOM']
   require 'io/console'
   require 'parsecom'
   require 'mechanize'

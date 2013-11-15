@@ -1,10 +1,13 @@
 #!/usr/bin/env ruby
 
+$0 = 'pry'
+
 begin
-  require 'parse/console'
+  require 'pry'
 rescue LoadError
   require 'rubygems'
-  require 'parse/console'
+  require ''
 end
 
-Parse::Console.start
+ENV['ENABLE_PRY_PARSECOM'] = 'on'
+Pry::CLI.parse_options
