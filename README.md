@@ -23,11 +23,7 @@ Or install it yourself as:
     Input parse.com email: andyjpn@gmail.com
     Input parse.com password: 
     FakeApp
-    import-test
-    nohana_nenga_production
-    nohana_nenga_staging
-    nohana_staging
-    parse_r
+    FakeApp2
     [2] pry(main)> use FakeApp
     The current app is FakeApp.
     [3] pry(main)> show-classes
