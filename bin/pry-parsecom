@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+begin
+  require 'parse/console'
+rescue LoadError
+  require 'rubygems'
+  require 'parse/console'
+end
+
+Parse::Console.start
