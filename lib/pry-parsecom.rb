@@ -9,6 +9,7 @@ unless ENV['DISABLE_PRY_PARSECOM']
   require 'yaml'
   require 'pry-parsecom/setting'
   require 'pry-parsecom/commands'
+  require 'pry-parsecom/table'
 #  require 'pry-parsecom/model_formatter'
   
   module PryParsecom

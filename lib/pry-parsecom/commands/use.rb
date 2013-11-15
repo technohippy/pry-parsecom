@@ -24,7 +24,6 @@ PryParsecom::Commands.create_command "use" do
     end
 
     PryParsecom::Setting.setup_if_needed
-
     unless PryParsecom::Setting.current_app.to_s.empty?
       prev_setting = PryParsecom::Setting.current_setting
       prev_setting.reset if prev_setting
