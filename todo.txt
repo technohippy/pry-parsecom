@@ -1,0 +1,6 @@
+- show-schema [appname]
+- show-credentials [appname]
+- show-classes [appname]
+- display cache timestamp
+- handle login failure
+- parse object formatter
