@@ -40,9 +40,16 @@ Or install it yourself as:
     Comment
     Post   
     _User  
-    [5] pry(main)> Comment.find :all
-    => [<Comment: {"author"=>#<Parse::Pointer:0x007fc6796dbba8 @r...
-    [6] pry(main)> exit
+    [5] pry(main)> show-schema Post
+    Name   |       Type
+    ============================
+    author   | pointer<_User>
+    body     | string
+    comments | relation<Comment>
+    title    | string
+    [6] pry(main)> Post.find :all
+    => [<Post: {"author"=>#<Parse::Pointer:0x007fc6796dbba8 @r...
+    [7] pry(main)> exit
 
 ## Contributing
 

@@ -183,11 +183,10 @@ module PryParsecom
     end
 
     def schema class_name
-      schemas = schemas['collection'].select do |e| 
+      schms = schemas['collection'].select do |e| 
         e['id'] == class_name || e['display_name'] == class_name
       end
-      puts schemas
-      schemas.empty? ? [] : schemas.first['schema']
+      schms.empty? ? [] : schms.first['schema']
     end
   end
 end

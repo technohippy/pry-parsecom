@@ -29,6 +29,9 @@ PryParsecom::Commands.create_command "show-schema" do
     schema = setting.schema class_name
     table = PryParsecom::Table.new %w(Name Type)
     schema.to_a.sort{|a1, a2| a1[0] <=> a2[0]}.each do |name, type|
+      if type =~ /^\*(.*)/
+        type = "pointer<#{$1}>"
+      end
       table.add_row [name, type]
     end
     output.puts table
