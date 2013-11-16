@@ -41,7 +41,7 @@ Or install it yourself as:
     Post   
     _User  
     [5] pry(main)> show-schema Post
-    Name   |       Type
+      Name   |       Type
     ============================
     author   | pointer<_User>
     body     | string
