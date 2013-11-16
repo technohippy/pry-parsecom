@@ -62,11 +62,8 @@ module PryParsecom
             keys = YAML.load keys
             schemas = YAML.load schemas
             keys.each do |app_name, key|
-              app_id = key['app_id']
-              api_key = key['api_key']
-              master_key = key['master_key']
-              schema = schemas[app_name]
-              @@apps[app_name] = Setting.new app_name, app_id, api_key, master_key, schema
+              @@apps[app_name] = Setting.new app_name, key['app_id'], key['api_key'], 
+                key['master_key'], schemas[app_name]
             end
             return true
           end
@@ -134,11 +131,11 @@ module PryParsecom
       end
     end
 
-    attr_accessor :app_name, :app_id, :api_key, :master_key, :schema
+    attr_accessor :app_name, :app_id, :api_key, :master_key, :schemas
 
-    def initialize app_name, app_id, api_key, master_key, schema
-      @app_name, @app_id, @api_key, @master_key, @schema = 
-        app_name, app_id, api_key, master_key, schema
+    def initialize app_name, app_id, api_key, master_key, schemas
+      @app_name, @app_id, @api_key, @master_key, @schemas = 
+        app_name, app_id, api_key, master_key, schemas
     end
 
     def set
@@ -147,7 +144,7 @@ module PryParsecom
       Parse::Client.default.api_key = @api_key
       Parse::Client.default.master_key = @master_key
 
-      schema['collection'].each do |e|
+      schemas['collection'].each do |e|
         class_name = e['id']
         next if class_name[0] == '_'
 
@@ -160,7 +157,7 @@ module PryParsecom
     end
 
     def reset
-      schema['collection'].each do |e|
+      schemas['collection'].each do |e|
         class_name = e['id']
         next if class_name[0] == '_'
 
@@ -182,7 +179,14 @@ module PryParsecom
     end
 
     def classes
-      schema['collection'].map{|e| e['id']}.sort
+      schemas['collection'].map{|e| e['id']}.sort
+    end
+
+    def schema class_name
+      (schemas['collection'].select do |e| 
+        e['id'] == class_name || e['display_name'] == class_name
+      end)['schema']
+
     end
   end
 end

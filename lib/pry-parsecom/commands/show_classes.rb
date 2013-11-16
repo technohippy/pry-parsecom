@@ -22,10 +22,13 @@ PryParsecom::Commands.create_command 'show-classes' do
     setting = PryParsecom::Setting.current_setting
     unless setting
       output.puts 'Now using no app'
+      return
     end
 
+    table = PryParsecom::Table.new %w(Name)
     setting.classes.each do |klass|
-      output.puts klass
+      table.add_row klass
     end
+    output.puts table
   end
 end

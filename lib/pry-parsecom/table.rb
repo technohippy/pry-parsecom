@@ -18,12 +18,15 @@ module PryParsecom
 
     def add_row row
       cols = []
-      if row.is_a? Hash
+      case row
+      when Hash
         @heads.each do |head|
           cols << row[head]
         end
-      else
+      when Array
         cols = row
+      else
+        cols = [row]
       end
 
       cols.each.with_index do |col, i|
