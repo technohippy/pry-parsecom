@@ -35,9 +35,11 @@ Or install it yourself as:
     REST_API_KEY   | abcdefghijklmnopqrstuvwxyzabcdefghijklmn
     MASTER_KEY     | abcdefghij******************************
     [4] pry(main)> show-classes
+    Name  
+    =======
     Comment
-    Post
-    _User
+    Post   
+    _User  
     [5] pry(main)> Comment.find :all
     => [<Comment: {"author"=>#<Parse::Pointer:0x007fc6796dbba8 @r...
     [6] pry(main)> exit
