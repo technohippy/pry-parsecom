@@ -53,7 +53,7 @@ CLI for parse.com
       __type: Pointer
       className: _User
       objectId: ZybBXQEIjI
-    body: 本文
+    body: Hello
     comments: <Ralations>
     createdAt: '2013-11-17T13:37:44.055Z'
     updatedAt: '2013-11-17T13:38:30.908Z'
@@ -65,7 +65,7 @@ CLI for parse.com
       __type: Pointer
       className: _User
       objectId: ZybBXQEIjI
-    body: 本文２
+    body: World
     comments: <Ralations>
     createdAt: '2013-11-17T14:33:00.134Z'
     updatedAt: '2013-11-17T14:33:25.436Z'
