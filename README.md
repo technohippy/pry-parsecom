@@ -1,55 +1,82 @@
 # pry-parsecom
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'pry-parsecom'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install pry-parsecom
+CLI for parse.com
 
 ## Usage
 
     $ pry-parsecom
-    [1] pry(main)> show-applications
+    [1] pry(main)> help parse.com
+    Parse.com
+      login-parsecom     Log in parse.com
+      logout-parsecom    Log out parse.com
+      show-applications  Show all parse applications
+      show-classes       Show all parse classes
+      show-credentials   Show credentials for parse.com
+      show-schema        Show a parse class schema
+      use-application    Set the current parse.com application
+    [2] pry(main)> show-applications
     Input parse.com email: andyjpn@gmail.com
     Input parse.com password: 
-      Name
-    ========
-    FakeApp
-    FakeApp2
-    [2] pry(main)> use FakeApp
+      Name   | Selected
+    ===================
+    FakeApp  |
+    FakeApp2 |
+    [3] pry(main)> use-application FakeApp
     The current app is FakeApp.
-    [3] pry(main)> show-credentials
+    [4] pry(main)> show-applications
+      Name   | Selected
+    ===================
+    FakeApp  | *
+    FakeApp2 |
+    [5] pry(main)> show-credentials
          Key       |                  Value
     =========================================================
     APPLICATION_ID | abcdefghijklmnopqrstuvwxyzabcdefghijklmn
     REST_API_KEY   | abcdefghijklmnopqrstuvwxyzabcdefghijklmn
     MASTER_KEY     | abcdefghij******************************
-    [4] pry(main)> show-classes
-    Name  
+    [6] pry(main)> show-classes
+     Name  
     =======
     Comment
     Post   
     _User  
-    [5] pry(main)> show-schema Post
+    [7] pry(main)> show-schema Post
       Name   |       Type
     ============================
     author   | pointer<_User>
     body     | string
     comments | relation<Comment>
-    title    | string
-    [6] pry(main)> Post.find :all
-    => [<Post: {"author"=>#<Parse::Pointer:0x007fc6796dbba8 @r...
-    [7] pry(main)> exit
+    [8] pry(main)> Post.find :all
+    => [---
+    __type: Post
+    author:
+      __type: Pointer
+      className: _User
+      objectId: ZybBXQEIjI
+    body: 本文
+    comments: <Ralations>
+    createdAt: '2013-11-17T13:37:44.055Z'
+    updatedAt: '2013-11-17T13:38:30.908Z'
+    objectId: lNKMPYSCTw
+    ,
+     ---
+    __type: Post
+    author:
+      __type: Pointer
+      className: _User
+      objectId: ZybBXQEIjI
+    body: 本文２
+    comments: <Ralations>
+    createdAt: '2013-11-17T14:33:00.134Z'
+    updatedAt: '2013-11-17T14:33:25.436Z'
+    objectId: ur2StDqAFD
+    ]
+    [9] pry(main)> logout
+    logged out
+    [10] pry(main)> show-applications
+      Name   | Selected
+    ===================
+    [11] pry(main)> exit
 
 ## Contributing
 

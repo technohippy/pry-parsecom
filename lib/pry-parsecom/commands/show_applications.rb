@@ -14,9 +14,9 @@ PryParsecom::Commands.create_command "show-applications" do
 
   def process
     PryParsecom::Setting.setup_if_needed
-    table = PryParsecom::Table.new %w(Name)
+    table = PryParsecom::Table.new %w(Name Selected)
     PryParsecom::Setting.app_names.each do |name|
-      table.add_row name
+      table.add_row [name, name == PryParsecom::Setting.current_app ? '*' : '']
     end
     output.puts table
   end

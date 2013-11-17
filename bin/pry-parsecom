@@ -6,7 +6,7 @@ begin
   require 'pry'
 rescue LoadError
   require 'rubygems'
-  require ''
+  require 'pry'
 end
 
 ENV['ENABLE_PRY_PARSECOM'] = 'on'

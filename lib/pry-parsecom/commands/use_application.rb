@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-PryParsecom::Commands.create_command "use" do
+PryParsecom::Commands.create_command 'use-application' do
   group 'Parse.com'
   description 'Set the current parse.com application'
 

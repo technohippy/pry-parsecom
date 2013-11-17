@@ -10,7 +10,7 @@ if ENV['ENABLE_PRY_PARSECOM']
   require 'pry-parsecom/setting'
   require 'pry-parsecom/commands'
   require 'pry-parsecom/table'
-#  require 'pry-parsecom/model_formatter'
+  require 'pry-parsecom/model_formatter'
   
   module PryParsecom
     module_function

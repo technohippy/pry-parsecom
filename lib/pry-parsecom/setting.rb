@@ -8,6 +8,8 @@ module PryParsecom
 
     USER_AGENT = 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'
     LOGIN_URL = 'https://parse.com/apps'
+    LOGIN_SUCCESS_FILENAME= 'apps.html'
+    LOGIN_ERROR_FILENAME = 'user_session.html'
     APPS_XPATH = '/html/body/div[4]/div[2]/div/div/div/div[3]/ul/li/ul/li/a'
     APP_NAME_XPATH = '//*[@id="parse_app_name"]'
     APP_KEYS_CSS = 'div.app_keys.window'
@@ -35,7 +37,9 @@ module PryParsecom
 
       def setup_if_needed
         if @@apps.empty?
-          refresh *PryParsecom.ask_email_and_password unless load
+          unless load
+            login *PryParsecom.ask_email_and_password 
+          end
         end
       end
 
@@ -81,18 +85,25 @@ module PryParsecom
             'master_key' => setting.master_key
           }
 
-          schemas[app_name] = setting.schema
+          schemas[app_name] = setting.schemas
         end
         write_setting_file KEYS_FILENAME, keys
         write_setting_file SCHEMAS_FILENAME, schemas
       end
 
-      def refresh email, password
+      def login email, password
+        @@apps = {}
+
         login_page = @@agent.get LOGIN_URL
         apps_page = login_page.form_with :id => 'new_user_session' do |form|
           form['user_session[email]'] = email
           form['user_session[password]'] = password
         end.submit
+
+        if apps_page.filename == LOGIN_ERROR_FILENAME
+          puts 'login error'
+          return
+        end
 
         apps_page.search(APPS_XPATH).each do |a|
           href = a.attributes['href'].to_s
@@ -111,6 +122,13 @@ module PryParsecom
         end
 
         save
+      end
+
+      def logout
+        FileUtils.rm "#{DOT_DIRNAME}/#{KEYS_FILENAME}"
+        FileUtils.rm "#{DOT_DIRNAME}/#{SCHEMAS_FILENAME}"
+        @@apps.clear
+        @@current_app = nil
       end
 
       def app_names
