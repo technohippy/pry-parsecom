@@ -13,12 +13,24 @@ PryParsecom::Commands.create_command "show-credentials" do
   end
 
   def process
+    if 1 < args.size
+      output.puts opt
+      return
+    end
+
     PryParsecom::Setting.setup_if_needed
-    table = PryParsecom::Table.new %w(Key Value), [
-      ['APPLICATION_ID', Parse.application_id],
-      ['REST_API_KEY', Parse.api_key],
-      ['MASTER_KEY', (Parse.master_key || '').sub(/.{30}$/, '*' * 30)]
-    ]
+    table = PryParsecom::Table.new %w(Key Value)
+    if args.empty?
+      table.add_row ['APPLICATION_ID', Parse.application_id || '']
+      table.add_row ['REST_API_KEY', Parse.api_key || '']
+      table.add_row ['MASTER_KEY', (Parse.master_key || '').sub(/.{30}$/, '*' * 30)]
+    else
+      app_name = args.first
+      setting = PryParsecom::Setting.by_name app_name
+      table.add_row ['APPLICATION_ID', setting.app_id]
+      table.add_row ['REST_API_KEY', setting.api_key]
+      table.add_row ['MASTER_KEY', (setting.master_key || '').sub(/.{30}$/, '*' * 30)]
+    end
     output.puts table
   end
 end

@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["andyjpn@gmail.com"]
   gem.description   = %q{CLI for parse.com}
   gem.summary       = %q{CLI for parse.com}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/technohippy/pry-parsecom"
   gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($/)

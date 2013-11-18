@@ -19,9 +19,10 @@ PryParsecom::Commands.create_command 'show-classes' do
     end
 
     PryParsecom::Setting.setup_if_needed
-    setting = PryParsecom::Setting.current_setting
+    app_name = args.first || PryParsecom::Setting.current_app
+    setting = PryParsecom::Setting.by_name app_name
     unless setting
-      output.puts 'Now using no app'
+      output.puts "Application no found: #{app_name}"
       return
     end
 
