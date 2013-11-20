@@ -32,5 +32,6 @@ PryParsecom::Commands.create_command "show-credentials" do
       table.add_row ['MASTER_KEY', (setting.master_key || '').sub(/.{30}$/, '*' * 30)]
     end
     output.puts table
+    output.puts "(cached at: #{PryParsecom::Setting.cache_time})"
   end
 end

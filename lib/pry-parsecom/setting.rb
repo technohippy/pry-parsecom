@@ -29,6 +29,8 @@ module PryParsecom
 
       def current_app= app
         @@current_app = app
+        store_setting
+        app
       end
 
       def current_setting
@@ -37,7 +39,7 @@ module PryParsecom
 
       def setup_if_needed
         if @@apps.empty?
-          unless load
+          unless restore
             login *PryParsecom.ask_email_and_password 
           end
         end
@@ -54,7 +56,7 @@ module PryParsecom
         end
       end
 
-      def load
+      def restore
         if File.exist? DOT_DIRNAME
           settings = read_setting_file SETTINGS_FILENAME
           ignores = read_setting_file IGNORES_FILENAME
@@ -69,13 +71,17 @@ module PryParsecom
               @@apps[app_name] = Setting.new app_name, key['app_id'], key['api_key'], 
                 key['master_key'], schemas[app_name]
             end
+            unless settings.empty?
+              settings = YAML.load settings
+              @@current_app = settings['current_app']
+            end
             return true
           end
         end
         false
       end
 
-      def save
+      def store_cache
         keys = {}
         schemas = {}
         @@apps.each do |app_name, setting|
@@ -89,6 +95,12 @@ module PryParsecom
         end
         write_setting_file KEYS_FILENAME, keys
         write_setting_file SCHEMAS_FILENAME, schemas
+      end
+
+      def store_setting
+        if @@current_app
+          write_setting_file SETTINGS_FILENAME, 'current_app' => @@current_app
+        end
       end
 
       def login email, password
@@ -121,7 +133,7 @@ module PryParsecom
           @@apps[app_name] = Setting.new app_name, app_id, api_key, master_key, schema
         end
 
-        save
+        store_cache
       end
 
       def logout
@@ -129,6 +141,14 @@ module PryParsecom
         FileUtils.rm "#{DOT_DIRNAME}/#{SCHEMAS_FILENAME}"
         @@apps.clear
         @@current_app = nil
+      end
+
+      def cache_time
+        if File.exist? DOT_DIRNAME
+          File.mtime "#{DOT_DIRNAME}/#{SCHEMAS_FILENAME}"
+        else
+          nil
+        end
       end
 
       def app_names

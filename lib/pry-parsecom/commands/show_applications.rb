@@ -19,5 +19,6 @@ PryParsecom::Commands.create_command "show-applications" do
       table.add_row [name, name == PryParsecom::Setting.current_app ? '*' : '']
     end
     output.puts table
+    output.puts "(cached at: #{PryParsecom::Setting.cache_time})"
   end
 end

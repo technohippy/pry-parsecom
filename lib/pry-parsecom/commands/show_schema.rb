@@ -35,5 +35,6 @@ PryParsecom::Commands.create_command "show-schema" do
       table.add_row [name, type]
     end
     output.puts table
+    output.puts "(cached at: #{PryParsecom::Setting.cache_time})"
   end
 end

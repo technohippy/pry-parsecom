@@ -31,5 +31,6 @@ PryParsecom::Commands.create_command 'show-classes' do
       table.add_row klass
     end
     output.puts table
+    output.puts "(cached at: #{PryParsecom::Setting.cache_time})"
   end
 end
