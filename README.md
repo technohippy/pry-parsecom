@@ -28,7 +28,7 @@ Note that classes and schemas are cached when you call login-parse command. To u
 
 ### Choose an application
 
-Before accessing your parse.com application, you have to declare which application you use by calling the use-application command. 
+Before accessing your parse.com application, you have to declare which application you would like to use by calling the use-application command. 
 
     [1] pry(main)> use-application YourApp
     The current app is YourApp.
