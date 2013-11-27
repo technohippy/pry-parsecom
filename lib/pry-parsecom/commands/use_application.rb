@@ -15,7 +15,7 @@ PryParsecom::Commands.create_command 'use-application' do
   def process
     PryParsecom::Setting.setup_if_needed
     unless args.size == 1
-      output.puts opt
+      output.puts opts
       return
     end
     app_name = args.first.to_s
@@ -30,7 +30,7 @@ PryParsecom::Commands.create_command 'use-application' do
     end
 
     setting = PryParsecom::Setting[app_name]
-    setting.set
+    setting.apply
     PryParsecom::Setting.current_app = app_name
     output.puts "The current app is #{app_name}."
   end

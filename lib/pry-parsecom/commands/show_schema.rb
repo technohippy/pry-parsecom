@@ -14,7 +14,7 @@ PryParsecom::Commands.create_command "show-schema" do
 
   def process
     unless args.size == 1
-      output.puts opt
+      output.puts opts
       return
     end
 

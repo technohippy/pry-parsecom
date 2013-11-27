@@ -73,7 +73,7 @@ module PryParsecom
             end
             unless settings.empty?
               settings = YAML.load settings
-              @@current_app = settings['current_app']
+              self.current_app = settings['current_app']
             end
             return true
           end
@@ -176,7 +176,7 @@ module PryParsecom
         app_name, app_id, api_key, master_key, schemas
     end
 
-    def set
+    def apply
       Parse.credentials :application_id => @app_id, :api_key => @api_key, :master_key => @master_key
       Parse::Client.default.application_id = @app_id
       Parse::Client.default.api_key = @api_key

@@ -1,7 +1,10 @@
 module PryParsecom
   class Table
-    def initialize heads, rows=[]
+    attr_accessor :indent
+
+    def initialize heads, indent='  ', rows=[]
       @heads = heads
+      @indent = indent
       @col_widths = Hash.new 0
       @heads.each do |head|
         @col_widths[head] = head.size
@@ -51,7 +54,7 @@ module PryParsecom
         }.join " | "
         ret += "\n"
       end
-      ret
+      ret.gsub /^/, @indent
     end
   end
 end

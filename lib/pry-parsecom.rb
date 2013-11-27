@@ -16,9 +16,9 @@ if ENV['ENABLE_PRY_PARSECOM']
     module_function
 
     def ask_email_and_password
-      print 'Input parse.com email: '
+      print 'Email for parse.com: '
       email = gets
-      print 'Input parse.com password: '
+      print 'Password for parse.com: '
       password = STDIN.noecho(&:gets)
       puts
       [email.strip, password.strip]

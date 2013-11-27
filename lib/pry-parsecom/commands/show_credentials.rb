@@ -14,7 +14,7 @@ PryParsecom::Commands.create_command "show-credentials" do
 
   def process
     if 1 < args.size
-      output.puts opt
+      output.puts opts
       return
     end
 

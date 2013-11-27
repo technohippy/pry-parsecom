@@ -14,7 +14,7 @@ PryParsecom::Commands.create_command 'show-classes' do
 
   def process
     if 1 < args.size
-      output.puts opt
+      output.puts opts
       return
     end
 
@@ -26,9 +26,10 @@ PryParsecom::Commands.create_command 'show-classes' do
       return
     end
 
-    table = PryParsecom::Table.new %w(Name)
-    setting.classes.each do |klass|
-      table.add_row klass
+    table = PryParsecom::Table.new %w(Name Class)
+    setting.classes.each do |parse_class|
+      class_name = parse_class.sub /^_/, 'Parse::'
+      table.add_row [parse_class, class_name]
     end
     output.puts table
     output.puts "(cached at: #{PryParsecom::Setting.cache_time})"
